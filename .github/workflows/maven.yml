@@ -28,9 +28,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run tests
-      run: cd java_backend && mvn --batch-mode --update-snapshots verify
-    - run: mkdir staging && cp target/*.jar staging
-    - uses: actions/upload-artifact@v4
-      with:
-        name: Package
-        path: staging
+      run: cd java_backend && mvn test
