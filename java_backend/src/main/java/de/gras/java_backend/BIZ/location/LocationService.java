@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import de.gras.java_backend.BIZ.item.ItemDomain;
+import de.gras.java_backend.DATA.orm.Item;
 import de.gras.java_backend.DATA.orm.Location;
 import de.gras.java_backend.DATA.repositories.LocationRepository;
 
@@ -32,5 +34,14 @@ public class LocationService {
         var entity = LocationMapper.toEntity(domain);
         var saved = this.locationRepository.save(entity);
         return this.getById(saved.getId());
+    }
+
+    // ab damit in ne Basis-Klasse
+    public void save(LocationDomain locationDomain) {
+        this.locationRepository.save((Location) locationDomain.getEntity());
+    }
+
+    public void delete(LocationDomain locationDomain) {
+        this.locationRepository.delete((Location) locationDomain.getEntity());
     }
 }

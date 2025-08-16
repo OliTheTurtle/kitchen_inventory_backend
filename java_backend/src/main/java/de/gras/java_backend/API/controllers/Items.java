@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +73,14 @@ public class Items {
         domain.setName(updateDomain.getName());
         domain.setBestBeforeDate(updateDomain.getBestBeforeDate());
         domain.setLocation(updateDomain.getLocation());
-        itemService.save(domain);
+        this.itemService.save(domain);
+        return new ResponseEntity<Long>(domain.getId(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/items/{itemId}")
+    public ResponseEntity<Long> deleteItem(@PathVariable Long itemId) {
+        ItemDomain domain = this.itemService.getById(itemId);
+        this.itemService.delete(domain);
         return new ResponseEntity<Long>(domain.getId(), HttpStatus.OK);
     }
 }

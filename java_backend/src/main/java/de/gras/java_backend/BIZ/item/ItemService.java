@@ -34,4 +34,8 @@ public class ItemService {
     public void save(ItemDomain itemDomain) {
         this.itemRepository.save((Item) itemDomain.getEntity());
     }
+
+    public void delete(ItemDomain itemDomain) {
+        this.itemRepository.delete((Item) itemDomain.getEntity());
+    }
 }
