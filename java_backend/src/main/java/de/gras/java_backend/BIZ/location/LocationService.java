@@ -1,9 +1,11 @@
 package de.gras.java_backend.BIZ.location;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import de.gras.java_backend.DATA.orm.Location;
 import de.gras.java_backend.DATA.repositories.LocationRepository;
 
 @Service
@@ -19,7 +21,11 @@ public class LocationService {
     }
 
     public LocationDomain getById(Long id) {
-        return this.locationRepository.findById(id).map(LocationMapper::toDomain).get();
+        Optional<Location> location = this.locationRepository.findById(id);
+        if (!location.isPresent()) {
+            return null;
+        }
+        return location.map(LocationMapper::toDomain).get();
     }
 
     public LocationDomain create(LocationDomain domain) {

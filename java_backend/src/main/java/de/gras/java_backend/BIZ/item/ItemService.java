@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import de.gras.java_backend.DATA.orm.Item;
 import de.gras.java_backend.DATA.repositories.ItemRepository;
 
 @Service
@@ -28,5 +29,9 @@ public class ItemService {
         var saved = this.itemRepository.save(entity);
 
         return this.getById(saved.getId());
+    }
+
+    public void save(ItemDomain itemDomain) {
+        this.itemRepository.save((Item) itemDomain.getEntity());
     }
 }

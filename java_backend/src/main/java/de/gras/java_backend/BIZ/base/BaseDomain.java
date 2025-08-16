@@ -1,4 +1,4 @@
-package de.gras.java_backend.BIZ;
+package de.gras.java_backend.BIZ.base;
 
 import de.gras.java_backend.DATA.orm.BaseEntity;
 

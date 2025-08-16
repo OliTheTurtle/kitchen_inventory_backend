@@ -4,8 +4,6 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import de.gras.java_backend.API.models.location.LocationRequestModel;
-import de.gras.java_backend.API.models.location.LocationResponseModel;
 import jakarta.validation.constraints.NotNull;
 
 public class ItemRequestModel {

@@ -1,4 +1,4 @@
-package de.gras.java_backend.API.controllers;
+package de.gras.java_backend.API;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
