@@ -1,0 +1,57 @@
+package de.gras.java_backend.API.models;
+
+import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.validation.constraints.NotNull;
+
+public class ItemModel {
+    private Long id;
+
+    @NotNull
+    private String name;
+
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date bestBeforeDate;
+
+    @NotNull
+    private LocationModel location;
+
+    public ItemModel(Long id, String name, Date bestBeforeDate, LocationModel location) {
+        this.id = id;
+        this.name = name;
+        this.bestBeforeDate = bestBeforeDate;
+        this.location = location;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getBestBeforeDate() {
+        return this.bestBeforeDate;
+    }
+
+    public void setBestBeforeDate(Date bestBeforeDate) {
+        this.bestBeforeDate = bestBeforeDate;
+    }
+
+    public LocationModel getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(LocationModel location) {
+        this.location = location;
+    }
+
+}

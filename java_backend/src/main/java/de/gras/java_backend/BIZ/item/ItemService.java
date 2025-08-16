@@ -1,0 +1,26 @@
+package de.gras.java_backend.BIZ.item;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import de.gras.java_backend.DATA.repositories.ItemRepository;
+
+@Service
+public class ItemService {
+    private final ItemRepository itemRepository;
+
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
+    public List<ItemDomain> getAll() {
+        return this.itemRepository.findAll().stream().map(ItemMapper::toDomain).toList();
+    }
+
+    public ItemDomain create(ItemDomain domain) {
+        var entity = ItemMapper.toEntity(domain);
+        var saved = this.itemRepository.save(entity);
+        return ItemMapper.toDomain(saved);
+    }
+}
