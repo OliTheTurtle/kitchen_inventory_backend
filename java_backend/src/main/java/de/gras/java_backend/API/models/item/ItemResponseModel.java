@@ -1,12 +1,14 @@
-package de.gras.java_backend.API.models;
+package de.gras.java_backend.API.models.item;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import de.gras.java_backend.API.models.location.LocationResponseModel;
 import jakarta.validation.constraints.NotNull;
 
-public class ItemModel {
+public class ItemResponseModel {
     private Long id;
 
     @NotNull
@@ -17,9 +19,9 @@ public class ItemModel {
     private Date bestBeforeDate;
 
     @NotNull
-    private LocationModel location;
+    private Optional<LocationResponseModel> location;
 
-    public ItemModel(Long id, String name, Date bestBeforeDate, LocationModel location) {
+    public ItemResponseModel(Long id, String name, Date bestBeforeDate, Optional<LocationResponseModel> location) {
         this.id = id;
         this.name = name;
         this.bestBeforeDate = bestBeforeDate;
@@ -46,11 +48,11 @@ public class ItemModel {
         this.bestBeforeDate = bestBeforeDate;
     }
 
-    public LocationModel getLocation() {
+    public Optional<LocationResponseModel> getLocation() {
         return this.location;
     }
 
-    public void setLocation(LocationModel location) {
+    public void setLocation(Optional<LocationResponseModel> location) {
         this.location = location;
     }
 

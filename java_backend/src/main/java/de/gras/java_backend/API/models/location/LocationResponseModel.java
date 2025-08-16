@@ -1,13 +1,13 @@
-package de.gras.java_backend.API.models;
+package de.gras.java_backend.API.models.location;
 
 import jakarta.validation.constraints.NotNull;
 
-public class LocationModel {
+public class LocationResponseModel {
     private Long id;
     @NotNull
     private String name;
 
-    public LocationModel(Long id, String name) {
+    public LocationResponseModel(Long id, String name) {
         this.id = id;
         this.name = name;
     }

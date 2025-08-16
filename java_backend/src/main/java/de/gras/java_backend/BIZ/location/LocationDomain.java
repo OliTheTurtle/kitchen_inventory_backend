@@ -1,11 +1,10 @@
 package de.gras.java_backend.BIZ.location;
 
-public class LocationDomain {
+import de.gras.java_backend.BIZ.BaseDomain;
+
+public class LocationDomain extends BaseDomain {
     private Long id;
     private String name;
-
-    public LocationDomain() {
-    }
 
     public LocationDomain(Long id, String name) {
         this.id = id;

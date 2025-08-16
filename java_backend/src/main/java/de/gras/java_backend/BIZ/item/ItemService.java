@@ -18,9 +18,15 @@ public class ItemService {
         return this.itemRepository.findAll().stream().map(ItemMapper::toDomain).toList();
     }
 
+    public ItemDomain getById(Long id) {
+        return this.itemRepository.findById(id).map(ItemMapper::toDomain).get();
+    }
+
     public ItemDomain create(ItemDomain domain) {
         var entity = ItemMapper.toEntity(domain);
+
         var saved = this.itemRepository.save(entity);
-        return ItemMapper.toDomain(saved);
+
+        return this.getById(saved.getId());
     }
 }

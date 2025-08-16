@@ -12,9 +12,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "data", name = "item")
-public class Item {
+public class Item implements BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

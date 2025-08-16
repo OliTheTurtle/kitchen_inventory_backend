@@ -1,16 +1,18 @@
 package de.gras.java_backend.BIZ.item;
 
 import java.sql.Date;
+import java.util.Optional;
 
+import de.gras.java_backend.BIZ.BaseDomain;
 import de.gras.java_backend.BIZ.location.LocationDomain;
 
-public class ItemDomain {
+public class ItemDomain extends BaseDomain {
     private Long id;
     private String name;
     private Date bestBeforeDate;
-    private LocationDomain location;
+    private Optional<LocationDomain> location;
 
-    public ItemDomain(Long id, String name, Date bestBeforeDate, LocationDomain location) {
+    public ItemDomain(Long id, String name, Date bestBeforeDate, Optional<LocationDomain> location) {
         this.id = id;
         this.name = name;
         this.bestBeforeDate = bestBeforeDate;
@@ -37,8 +39,12 @@ public class ItemDomain {
         this.bestBeforeDate = bestBeforeDate;
     }
 
-    public LocationDomain getLocation() {
+    public Optional<LocationDomain> getLocation() {
         return this.location;
+    }
+
+    public void setLocation(Optional<LocationDomain> location) {
+        this.location = location;
     }
 
 }
