@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import de.gras.java_backend.BIZ.item.ItemDomain;
-import de.gras.java_backend.DATA.orm.Item;
 import de.gras.java_backend.DATA.orm.Location;
 import de.gras.java_backend.DATA.repositories.LocationRepository;
 

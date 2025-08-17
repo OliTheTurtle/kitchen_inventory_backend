@@ -40,7 +40,11 @@ public class Items {
 
     @GetMapping("/items/{itemId}")
     public ItemResponseModel getItems(@PathVariable Long itemId) {
-        return ItemMapper.toModel(this.itemService.getById(itemId));
+        ItemDomain itemDomain = this.itemService.getById(itemId);
+        if (itemDomain == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return ItemMapper.toModel(itemDomain);
     }
 
     @PostMapping("/items")

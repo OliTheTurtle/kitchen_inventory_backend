@@ -1,6 +1,7 @@
 package de.gras.java_backend.BIZ.item;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class ItemService {
     }
 
     public ItemDomain getById(Long id) {
+        Optional<Item> item = this.itemRepository.findById(id);
+        if (item == null) {
+            return null;
+        }
         return this.itemRepository.findById(id).map(ItemMapper::toDomain).get();
     }
 
