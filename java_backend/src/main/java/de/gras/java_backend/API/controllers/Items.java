@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,9 +34,36 @@ public class Items {
         this.locationService = locationService;
     }
 
+    // TODO: move sorting to ORM layer
     @GetMapping("/items")
-    public List<ItemResponseModel> getItems() {
-        return this.itemService.getAll().stream().map(ItemMapper::toModel).toList();
+    public List<ItemResponseModel> getItems(
+            @RequestParam(value = "orderBy", required = false, defaultValue = "bestBeforeDate") String orderBy,
+            @RequestParam(value = "direction", required = false, defaultValue = "asc") String direction) {
+        var items = this.itemService.getAll();
+        java.util.Comparator<ItemDomain> comparator;
+        if (orderBy == null || orderBy.equals("bestBeforeDate")) {
+            comparator = (a, b) -> {
+                if (a.getBestBeforeDate() == null && b.getBestBeforeDate() == null)
+                    return 0;
+                if (a.getBestBeforeDate() == null)
+                    return 1;
+                if (b.getBestBeforeDate() == null)
+                    return -1;
+                return a.getBestBeforeDate().compareTo(b.getBestBeforeDate());
+            };
+        } else if (orderBy.equals("name")) {
+            comparator = java.util.Comparator.comparing(ItemDomain::getName,
+                    java.util.Comparator.nullsLast(String::compareTo));
+        } else {
+            comparator = (a, b) -> 0; // no sorting if unknown
+        }
+        if (direction.equalsIgnoreCase("desc")) {
+            comparator = comparator.reversed();
+        }
+        return items.stream()
+                .sorted(comparator)
+                .map(ItemMapper::toModel)
+                .toList();
     }
 
     @GetMapping("/items/{itemId}")

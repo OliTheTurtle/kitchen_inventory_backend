@@ -31,7 +31,6 @@ public class Item implements BaseEntity {
     }
 
     public Item() {
-        // TODO Auto-generated constructor stub
     }
 
     public Long getId() {
