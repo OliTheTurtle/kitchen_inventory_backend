@@ -36,7 +36,7 @@ public class Items {
 
     // TODO: move sorting to ORM layer
     @GetMapping("/items")
-    public List<ItemResponseModel> getItems(
+    public ResponseEntity<List<ItemResponseModel>> getItems(
             @RequestParam(value = "orderBy", required = false, defaultValue = "bestBeforeDate") String orderBy,
             @RequestParam(value = "direction", required = false, defaultValue = "asc") String direction) {
         var items = this.itemService.getAll();
@@ -60,19 +60,19 @@ public class Items {
         if (direction.equalsIgnoreCase("desc")) {
             comparator = comparator.reversed();
         }
-        return items.stream()
+        return new ResponseEntity<List<ItemResponseModel>>(items.stream()
                 .sorted(comparator)
                 .map(ItemMapper::toModel)
-                .toList();
+                .toList(), HttpStatus.OK);
     }
 
     @GetMapping("/items/{itemId}")
-    public ItemResponseModel getItems(@PathVariable Long itemId) {
+    public ResponseEntity<ItemResponseModel> getItems(@PathVariable Long itemId) {
         ItemDomain itemDomain = this.itemService.getById(itemId);
         if (itemDomain == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return ItemMapper.toModel(itemDomain);
+        return new ResponseEntity<ItemResponseModel>(ItemMapper.toModel(itemDomain), HttpStatus.OK);
     }
 
     @PostMapping("/items")

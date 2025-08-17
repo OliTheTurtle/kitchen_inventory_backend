@@ -29,8 +29,9 @@ public class Locations {
     }
 
     @GetMapping("/locations")
-    public List<LocationResponseModel> getLocations() {
-        return this.locationService.getAll().stream().map(LocationMapper::toModel).toList();
+    public ResponseEntity<List<LocationResponseModel>> getLocations() {
+        return new ResponseEntity<List<LocationResponseModel>>(
+                this.locationService.getAll().stream().map(LocationMapper::toModel).toList(), HttpStatus.OK);
     }
 
     @PostMapping("/locations")
