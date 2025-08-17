@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import de.gras.java_backend.API.models.location.LocationResponseModelSimple;
 import jakarta.validation.constraints.NotNull;
 
-public class ItemResponseModel {
+public class ItemResponseModelSimple {
     private Long id;
 
     @NotNull
@@ -21,12 +21,10 @@ public class ItemResponseModel {
     @NotNull
     private Optional<LocationResponseModelSimple> location;
 
-    public ItemResponseModel(Long id, String name, Date bestBeforeDate,
-            Optional<LocationResponseModelSimple> location) {
+    public ItemResponseModelSimple(Long id, String name, Date bestBeforeDate) {
         this.id = id;
         this.name = name;
         this.bestBeforeDate = bestBeforeDate;
-        this.location = location;
     }
 
     public Long getId() {
@@ -47,14 +45,6 @@ public class ItemResponseModel {
 
     public void setBestBeforeDate(Date bestBeforeDate) {
         this.bestBeforeDate = bestBeforeDate;
-    }
-
-    public Optional<LocationResponseModelSimple> getLocation() {
-        return this.location;
-    }
-
-    public void setLocation(Optional<LocationResponseModelSimple> location) {
-        this.location = location;
     }
 
 }

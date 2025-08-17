@@ -19,7 +19,7 @@ public class Location implements BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "location")
-    private List<Item> itesms;
+    private List<Item> items;
 
     public Long getId() {
         return this.id;
@@ -31,5 +31,9 @@ public class Location implements BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Item> getItems() {
+        return this.items;
     }
 }

@@ -38,6 +38,11 @@ public class Items {
         return this.itemService.getAll().stream().map(ItemMapper::toModel).toList();
     }
 
+    @GetMapping("/items/{itemId}")
+    public ItemResponseModel getItems(@PathVariable Long itemId) {
+        return ItemMapper.toModel(this.itemService.getById(itemId));
+    }
+
     @PostMapping("/items")
     public ResponseEntity<Long> postItem(@Valid @RequestBody ItemRequestModel itemModel) {
         Optional<LocationDomain> locationDomain = Optional.empty();

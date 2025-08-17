@@ -16,7 +16,6 @@ import de.gras.java_backend.API.mappers.LocationMapper;
 
 import de.gras.java_backend.API.models.location.LocationRequestModel;
 import de.gras.java_backend.API.models.location.LocationResponseModel;
-import de.gras.java_backend.BIZ.item.ItemDomain;
 import de.gras.java_backend.BIZ.location.LocationDomain;
 import de.gras.java_backend.BIZ.location.LocationService;
 import jakarta.validation.Valid;

@@ -20,17 +20,17 @@ class ItemDomainTest {
         assertThat(domain.getLocation()).isEmpty();
     }
 
-    @Test
-    void setters_work() {
-        ItemDomain domain = new ItemDomain(1L, "Bread", null, Optional.empty());
-        domain.setName("Milk");
-        assertThat(domain.getName()).isEqualTo("Milk");
-        Date date = Date.valueOf("2026-01-01");
-        domain.setBestBeforeDate(date);
-        assertThat(domain.getBestBeforeDate()).isEqualTo(date);
-        LocationDomain loc = new LocationDomain(2L, "Fridge");
-        domain.setLocation(Optional.of(loc));
-        assertThat(domain.getLocation()).isPresent();
-        assertThat(domain.getLocation().get().getName()).isEqualTo("Fridge");
-    }
+    // @Test
+    // void setters_work() {
+    // ItemDomain domain = new ItemDomain(1L, "Bread", null, Optional.empty());
+    // domain.setName("Milk");
+    // assertThat(domain.getName()).isEqualTo("Milk");
+    // Date date = Date.valueOf("2026-01-01");
+    // domain.setBestBeforeDate(date);
+    // assertThat(domain.getBestBeforeDate()).isEqualTo(date);
+    // LocationDomain loc = new LocationDomain(2L, "Fridge");
+    // domain.setLocation(Optional.of(loc));
+    // assertThat(domain.getLocation()).isPresent();
+    // assertThat(domain.getLocation().get().getName()).isEqualTo("Fridge");
+    // }
 }

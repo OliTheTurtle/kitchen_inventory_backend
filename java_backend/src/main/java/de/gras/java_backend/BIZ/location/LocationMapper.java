@@ -4,7 +4,7 @@ import de.gras.java_backend.DATA.orm.Location;
 
 public class LocationMapper {
     public static LocationDomain toDomain(Location entity) {
-        LocationDomain locationDomain = new LocationDomain(entity.getId(), entity.getName());
+        LocationDomain locationDomain = new LocationDomain(entity.getId(), entity.getName(), entity.getItems());
         locationDomain.setEntity(entity);
         return locationDomain;
     }
