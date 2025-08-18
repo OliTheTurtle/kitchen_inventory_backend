@@ -30,8 +30,9 @@ public class Locations {
 
     @GetMapping("/locations")
     public ResponseEntity<List<LocationResponseModel>> getLocations() {
-        return new ResponseEntity<List<LocationResponseModel>>(
-                this.locationService.getAll().stream().map(LocationMapper::toModel).toList(), HttpStatus.OK);
+        List<LocationResponseModel> locations = this.locationService.getAll().stream().map(LocationMapper::toModel)
+                .toList();
+        return ResponseEntity.ok(locations);
     }
 
     @PostMapping("/locations")
@@ -51,13 +52,13 @@ public class Locations {
         LocationDomain updateDomain = LocationMapper.toDomain(locationModel);
         domain.setName(updateDomain.getName());
         this.locationService.save(domain);
-        return new ResponseEntity<Long>(domain.getId(), HttpStatus.OK);
+        return ResponseEntity.ok(domain.getId());
     }
 
     @DeleteMapping("/locations/{locationId}")
     public ResponseEntity<Long> deleteItem(@PathVariable Long locationId) {
         LocationDomain domain = this.locationService.getById(locationId);
         this.locationService.delete(domain);
-        return new ResponseEntity<Long>(domain.getId(), HttpStatus.OK);
+        return ResponseEntity.ok(domain.getId());
     }
 }

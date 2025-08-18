@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: java_backend
+    datasource:
+        url: jdbc:postgresql://${PSQL_DB_HOST}:${PSQL_DB_PORT}/${PSQL_DB_DBNAME}
+        username: ${PSQL_DB_USER}
+        password: ${PSQL_DB_PASSWD}
+    jpa:
+        hibernate:
+            ddl-auto: none
+            show-sql: true

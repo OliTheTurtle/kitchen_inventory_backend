@@ -60,10 +60,8 @@ public class Items {
         if (direction.equalsIgnoreCase("desc")) {
             comparator = comparator.reversed();
         }
-        return new ResponseEntity<List<ItemResponseModel>>(items.stream()
-                .sorted(comparator)
-                .map(ItemMapper::toModel)
-                .toList(), HttpStatus.OK);
+        List<ItemResponseModel> itemModels = items.stream().sorted(comparator).map(ItemMapper::toModel).toList();
+        return ResponseEntity.ok(itemModels);
     }
 
     @GetMapping("/items/{itemId}")
@@ -72,7 +70,7 @@ public class Items {
         if (itemDomain == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<ItemResponseModel>(ItemMapper.toModel(itemDomain), HttpStatus.OK);
+        return ResponseEntity.ok(ItemMapper.toModel(itemDomain));
     }
 
     @PostMapping("/items")
@@ -111,13 +109,13 @@ public class Items {
         domain.setBestBeforeDate(updateDomain.getBestBeforeDate());
         domain.setLocation(updateDomain.getLocation());
         this.itemService.save(domain);
-        return new ResponseEntity<Long>(domain.getId(), HttpStatus.OK);
+        return ResponseEntity.ok(domain.getId());
     }
 
     @DeleteMapping("/items/{itemId}")
     public ResponseEntity<Long> deleteItem(@PathVariable Long itemId) {
         ItemDomain domain = this.itemService.getById(itemId);
         this.itemService.delete(domain);
-        return new ResponseEntity<Long>(domain.getId(), HttpStatus.OK);
+        return ResponseEntity.ok(domain.getId());
     }
 }
