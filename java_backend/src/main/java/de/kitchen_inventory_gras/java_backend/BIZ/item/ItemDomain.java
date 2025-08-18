@@ -4,34 +4,34 @@ import java.sql.Date;
 import java.util.Optional;
 
 import de.kitchen_inventory_gras.java_backend.BIZ.base.BaseDomain;
-import de.kitchen_inventory_gras.java_backend.BIZ.base.ObservableProperty;
+import de.kitchen_inventory_gras.java_backend.BIZ.base.EntityProperty;
 import de.kitchen_inventory_gras.java_backend.BIZ.location.LocationDomain;
 import de.kitchen_inventory_gras.java_backend.DATA.orm.Location;
 
 public class ItemDomain extends BaseDomain {
     private Long id;
 
-    private ObservableProperty<String> name;
-    private ObservableProperty<Date> bestBeforeDate;
-    private ObservableProperty<Optional<LocationDomain>> location;
+    private EntityProperty<String> name;
+    private EntityProperty<Date> bestBeforeDate;
+    private EntityProperty<Optional<LocationDomain>> location;
 
     public ItemDomain(Long id, String name, Date bestBeforeDate, Optional<LocationDomain> location) {
         this.id = id;
 
         // Initialize ObservableProperties with sync logic
-        this.name = new ObservableProperty<>(name, v -> {
+        this.name = new EntityProperty<>(name, v -> {
             if (getEntity() instanceof de.kitchen_inventory_gras.java_backend.DATA.orm.Item entity) {
                 entity.setName(v);
             }
         });
 
-        this.bestBeforeDate = new ObservableProperty<>(bestBeforeDate, v -> {
+        this.bestBeforeDate = new EntityProperty<>(bestBeforeDate, v -> {
             if (getEntity() instanceof de.kitchen_inventory_gras.java_backend.DATA.orm.Item entity) {
                 entity.setBestBeforeDate(v);
             }
         });
 
-        this.location = new ObservableProperty<>(location, v -> {
+        this.location = new EntityProperty<>(location, v -> {
             if (getEntity() instanceof de.kitchen_inventory_gras.java_backend.DATA.orm.Item entity) {
                 entity.setLocation((Location) v.map(loc -> loc.getEntity()).orElse(null));
             }

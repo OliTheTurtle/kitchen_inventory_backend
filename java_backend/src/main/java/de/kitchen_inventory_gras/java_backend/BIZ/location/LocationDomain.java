@@ -3,7 +3,7 @@ package de.kitchen_inventory_gras.java_backend.BIZ.location;
 import java.util.List;
 
 import de.kitchen_inventory_gras.java_backend.BIZ.base.BaseDomain;
-import de.kitchen_inventory_gras.java_backend.BIZ.base.ObservableProperty;
+import de.kitchen_inventory_gras.java_backend.BIZ.base.EntityProperty;
 import de.kitchen_inventory_gras.java_backend.BIZ.item.ItemDomain;
 import de.kitchen_inventory_gras.java_backend.BIZ.item.ItemMapper;
 import de.kitchen_inventory_gras.java_backend.DATA.orm.Item;
@@ -12,14 +12,14 @@ public class LocationDomain extends BaseDomain {
     private Long id;
     private List<Item> items;
 
-    private ObservableProperty<String> name;
+    private EntityProperty<String> name;
 
     public LocationDomain(Long id, String name, List<Item> items) {
         this.id = id;
         this.items = items;
 
         // Initialize ObservableProperties with sync logic
-        this.name = new ObservableProperty<>(name, v -> {
+        this.name = new EntityProperty<>(name, v -> {
             if (getEntity() instanceof de.kitchen_inventory_gras.java_backend.DATA.orm.Location entity) {
                 entity.setName(v);
             }

@@ -2,11 +2,11 @@ package de.kitchen_inventory_gras.java_backend.BIZ.base;
 
 import java.util.function.Consumer;
 
-public class ObservableProperty<T> {
+public class EntityProperty<T> {
     private T value;
     private Consumer<T> onChange;
 
-    public ObservableProperty(T initialValue, Consumer<T> onChange) {
+    public EntityProperty(T initialValue, Consumer<T> onChange) {
         this.value = initialValue;
         this.onChange = onChange;
     }
